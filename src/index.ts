@@ -11,7 +11,7 @@ async function main() {
   await rabbitmq_client();
 
   const server = new grpc.Server();
-  server.addService(pb_services.queue, queue_contoller);
+  server.addService(pb_services.QueueService.service, queue_contoller);
 
   server.bindAsync(
     "0.0.0.0:" + PORT,

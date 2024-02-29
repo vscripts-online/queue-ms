@@ -6,4 +6,5 @@ export const queue_contoller: QueueServiceHandlers = {
     const response = await queue_service.NewFileUploaded(req.request);
     res(null, response);
   },
+  SendForgotPasswordMail: async (req, res) => {},
 };
