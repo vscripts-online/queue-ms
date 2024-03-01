@@ -9,7 +9,7 @@ services:
       NODE_ENV: production
       PORT: 3000
       RABBITMQ_URI: amqp://user:pass@host.docker.internal:10001
-      FILE_MS_URI: host.docker.internal:3131
+      FILE_MS_URI: host.docker.internal:20003
     ports:
       - 20001:3000
     depends_on:
