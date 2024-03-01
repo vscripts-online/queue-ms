@@ -14,6 +14,8 @@ services:
       - 20001:3000
     depends_on:
       - rabbitmq
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   rabbitmq:
     image: rabbitmq:3.12.13-management-alpine
