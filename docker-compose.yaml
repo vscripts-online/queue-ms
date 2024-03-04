@@ -16,6 +16,8 @@ services:
       - rabbitmq
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    networks:
+      - cdn_cdn
 
   rabbitmq:
     image: rabbitmq:3.12.13-management-alpine
@@ -28,7 +30,13 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=pass
+    networks:
+      - cdn_cdn
 
 volumes:
   queue_ms_volume:
   queue_ms_rabbitmq_volume:
+
+networks:
+  cdn_cdn:
+    external: true
