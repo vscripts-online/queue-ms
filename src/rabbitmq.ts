@@ -34,5 +34,7 @@ const channel_cacher = async (queue: Queues__Output) => {
 
 export const rabbitmq_channels = {
   file_part_upload_channel: () => channel_cacher(Queues.FILE_PART_UPLOAD),
-  forgot_password_mail_channel: () => channel_cacher(Queues.SEND_FORGOT_PASSWORD_EMAIL)
+  forgot_password_mail_channel: () =>
+    channel_cacher(Queues.SEND_FORGOT_PASSWORD_EMAIL),
+  delete_file_channel: () => channel_cacher(Queues.DELETE_FILE),
 };

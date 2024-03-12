@@ -10,4 +10,8 @@ export const queue_contoller: QueueServiceHandlers = {
     const response = await queue_service.SendForgotPasswordMail(req.request);
     res(null, response);
   },
+  DeleteFile: async (req, res) => {
+    const response = await queue_service.DeleteFile(req.request);
+    res(null, response);
+  },
 };
