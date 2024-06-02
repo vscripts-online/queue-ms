@@ -1,6 +1,6 @@
 import { Channel, Connection, connect } from "amqplib";
-import { RABBITMQ_URI } from "./config";
 import { Queues, Queues__Output } from "../pb/queue/Queues";
+import { RABBITMQ_URI } from "./config";
 
 let conn: Connection;
 
@@ -34,7 +34,5 @@ const channel_cacher = async (queue: Queues__Output) => {
 
 export const rabbitmq_channels = {
   file_part_upload_channel: () => channel_cacher(Queues.FILE_PART_UPLOAD),
-  forgot_password_mail_channel: () =>
-    channel_cacher(Queues.SEND_FORGOT_PASSWORD_EMAIL),
   delete_file_channel: () => channel_cacher(Queues.DELETE_FILE),
 };

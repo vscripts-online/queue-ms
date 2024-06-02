@@ -1,4 +1,5 @@
 import { File__Output } from "@pb/file/File";
+import { FilePart__Output } from "@pb/file/FilePart";
 import { FilePartUpload__Output } from "@pb/queue/FilePartUpload";
 import { QueueServiceHandlers } from "@pb/queue/QueueService";
 import bytes from "bytes";
@@ -8,12 +9,9 @@ import { file_ms_client } from "./microservices";
 import { rabbitmq_channels } from "./rabbitmq";
 import { GrpcResponserService } from "./type";
 import { first_value_from_stream } from "./util";
-import { ForgotPasswordMail__Output } from "@pb/queue/ForgotPasswordMail";
-import { FilePart__Output } from "@pb/file/FilePart";
 
 const queue_root = protobufjs.loadSync(QUEUE_PROTO_PATH);
 const FilePartUpload = queue_root.lookupType("queue.FilePartUpload");
-const ForgotPasswordMail = queue_root.lookupType("queue.ForgotPasswordMail");
 
 const file_root = protobufjs.loadSync(FILE_PROTO_PATH);
 const FilePart = file_root.lookupType("file.FilePart");
@@ -50,23 +48,6 @@ export const queue_service: GrpcResponserService<QueueServiceHandlers> = {
     }
 
     return { value: true };
-  },
-  SendForgotPasswordMail: async (data) => {
-    const { queue, channel } =
-      await rabbitmq_channels.forgot_password_mail_channel();
-
-    const payload: ForgotPasswordMail__Output = {
-      id: data.id,
-      code: data.code,
-      email: data.email,
-    };
-    const message = ForgotPasswordMail.fromObject(payload);
-    const buffer = ForgotPasswordMail.encode(message).finish() as Buffer;
-
-    console.log("sended to", queue, buffer.length);
-    const res = channel.sendToQueue(queue, buffer);
-
-    return { value: res };
   },
   DeleteFile: async (data) => {
     const { queue, channel } = await rabbitmq_channels.delete_file_channel();
