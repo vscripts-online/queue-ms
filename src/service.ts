@@ -39,6 +39,9 @@ export const queue_service: GrpcResponserService<QueueServiceHandlers> = {
         name: file.name,
       };
 
+      if (i === length - 1)
+        payload.last = true
+
       const message = FilePartUpload.fromObject(payload);
       const buffer = FilePartUpload.encode(message).finish() as Buffer;
 
