@@ -18,6 +18,7 @@ async function main() {
     grpc.ServerCredentials.createInsecure(),
     (err, port) => {
       if (err) {
+        console.log(err)
         process.exit(1);
       }
 
