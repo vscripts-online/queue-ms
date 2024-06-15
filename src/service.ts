@@ -34,7 +34,7 @@ async function SyncUnUploadedFiles() {
 }
 
 // SyncUnUploadedFiles()
-setInterval(SyncUnUploadedFiles, 60000 * 5) // 5 min
+// setInterval(SyncUnUploadedFiles, 60000 * 5) // 5 min
 
 async function getFiles(args: GetFilesRequestDTO__Output) {
   const { files } = await new Promise<GetFilesResponse__Output>((resolve, reject) => {
